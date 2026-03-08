@@ -1,126 +1,61 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "+1 Speed Escape Skateboard [OP & FREE]",
-   LoadingTitle = "🎲 L1inb7 Hub",
-   LoadingSubtitle = "by L1inb7",
+   Name = "L1inb7 Hub",
+   LoadingTitle = "L1inb7 Hub",
+   LoadingSubtitle = "Multi Game Script",
    ConfigurationSaving = {
-      Enabled = false,
-      FileName = "L1inb7 Hub"
+      Enabled = true,
+      FileName = "L1inb7Hub"
    },
-   KeySystem = false
+   KeySystem = true,
+   KeySettings = {
+      Title = "L1inb7 Hub Key",
+      Subtitle = "Key System",
+      Note = "Key from YouTube",
+      FileName = "L1inb7Key",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"L1inb7FREE"}
+   }
 })
 
-local player = game.Players.LocalPlayer
+local GamesTab = Window:CreateTab("Games", 4483362458)
+local InfoTab = Window:CreateTab("Info", 4483362458)
 
-----------------------------------------------------
--- MAIN TAB
-----------------------------------------------------
+-------------------------------------------------
+-- GAME SCRIPTS
+-------------------------------------------------
 
-local MainTab = Window:CreateTab("Main", 4483362458)
-
-Rayfield:Notify({
-   Title = "You executed the script",
-   Content = "Thanks for using L1inb7 Hub!",
-   Duration = 5
-})
-
-----------------------------------------------------
--- AUTO WINS
-----------------------------------------------------
-
-local autowins = false
-
-MainTab:CreateToggle({
-   Name = "Auto Claim Wins",
-   CurrentValue = false,
-   Callback = function(Value)
-      autowins = Value
-
-      while autowins do
-
-         local args = {
-            [1] = "Free",
-            [2] = Vector3.new(9914.46875, 6.305799961090088, -5766.15771484375)
-         }
-
-         game:GetService("ReplicatedStorage").Remote.Event.Player.ClaimWins:FireServer(unpack(args))
-
-         task.wait(1)
-
-      end
+GamesTab:CreateButton({
+   Name = "+1 Speed Escape Skateboard",
+   Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua"))()
    end,
 })
 
-----------------------------------------------------
--- EQUIP BEST SKATEBOARD
-----------------------------------------------------
+-------------------------------------------------
+-- INFO
+-------------------------------------------------
 
-MainTab:CreateButton({
-   Name = "Equip Best Skateboard (Northern Star)",
+InfoTab:CreateButton({
+   Name = "Copy YouTube",
    Callback = function()
-
-      local args = {
-         [1] = "Northern Star"
-      }
-
-      game:GetService("ReplicatedStorage").Remote.Event.UI.EquipBoard:FireServer(unpack(args))
-
+      setclipboard("https://youtube.com/@L1inb7_Scriptss")
       Rayfield:Notify({
          Title = "L1inb7 Hub",
-         Content = "Northern Star Equipped!",
+         Content = "YouTube copied!",
          Duration = 4
       })
-
    end,
 })
 
-----------------------------------------------------
--- OPEN EGG
-----------------------------------------------------
-
-MainTab:CreateButton({
-   Name = "Open Egg",
-   Callback = function()
-
-      local args = {
-         [1] = "Egg4"
-      }
-
-      game:GetService("ReplicatedStorage").Remote.Function.Eggs.OpenEgg:InvokeServer(unpack(args))
-
-      Rayfield:Notify({
-         Title = "L1inb7 Hub",
-         Content = "Egg opened!",
-         Duration = 4
-      })
-
-   end,
-})
--------------------
--- MESSAGE TAB
-----------------------------------------------------
-
-local MsgTab = Window:CreateTab("💬 Message", nil)
-
-MsgTab:CreateButton({
-   Name = "Ty for testing my scripts",
+InfoTab:CreateButton({
+   Name = "Thanks for using L1inb7 Hub",
    Callback = function()
       Rayfield:Notify({
          Title = "L1inb7 Hub",
-         Content = "Thanks for testing ❤️",
+         Content = "More games coming soon!",
          Duration = 5
       })
    end,
-})
-
-MsgTab:CreateButton({
-   Name = "My YT is L1inb7_Scriptss",
-   Callback = function()
-      Rayfield:Notify({
-         Title = "L1inb7 Hub",
-         Content = "Subscribe on YouTube!",
-         Duration = 5
-      })
-   end,
-})
