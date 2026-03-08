@@ -1,4 +1,4 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
 local Window = Rayfield:CreateWindow({
    Name = "L1inb7 Hub",
@@ -23,20 +23,12 @@ local Window = Rayfield:CreateWindow({
 local GamesTab = Window:CreateTab("Games", 4483362458)
 local InfoTab = Window:CreateTab("Info", 4483362458)
 
--------------------------------------------------
--- GAME SCRIPTS
--------------------------------------------------
-
 GamesTab:CreateButton({
    Name = "+1 Speed Escape Skateboard",
    Callback = function()
       loadstring(game:HttpGet("https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua"))()
-   end,
+   end
 })
-
--------------------------------------------------
--- INFO
--------------------------------------------------
 
 InfoTab:CreateButton({
    Name = "Copy YouTube",
@@ -47,7 +39,7 @@ InfoTab:CreateButton({
          Content = "YouTube copied!",
          Duration = 4
       })
-   end,
+   end
 })
 
 InfoTab:CreateButton({
@@ -58,4 +50,5 @@ InfoTab:CreateButton({
          Content = "More games coming soon!",
          Duration = 5
       })
-   end,
+   end
+}),
