@@ -80,7 +80,7 @@ MainTab:CreateButton({
 ----------------------------------------------------
 
 MainTab:CreateButton({
-   Name = "Open Egg4",
+   Name = "Open Egg",
    Callback = function()
 
       local args = {
@@ -97,50 +97,7 @@ MainTab:CreateButton({
 
    end,
 })
-
-----------------------------------------------------
--- PLAYER TAB
-----------------------------------------------------
-
-local PlayerTab = Window:CreateTab("Player", 4483362458)
-
-PlayerTab:CreateSlider({
-   Name = "WalkSpeed",
-   Range = {16,300},
-   Increment = 1,
-   CurrentValue = 16,
-   Callback = function(Value)
-
-      if player.Character then
-         player.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = Value
-      end
-
-   end,
-})
-
-----------------------------------------------------
--- INFINITE JUMP
-----------------------------------------------------
-
-local infjump = false
-
-PlayerTab:CreateToggle({
-   Name = "Infinite Jump",
-   CurrentValue = false,
-   Callback = function(Value)
-      infjump = Value
-   end,
-})
-
-game:GetService("UserInputService").JumpRequest:Connect(function()
-   if infjump then
-      if player.Character then
-         player.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-      end
-   end
-end)
-
-----------------------------------------------------
+-------------------
 -- MESSAGE TAB
 ----------------------------------------------------
 
