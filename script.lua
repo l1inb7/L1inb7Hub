@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "L1inb7 Hub",
-   LoadingTitle = "L1inb7 Hub",
-   LoadingSubtitle = "Scr1pt L0ader",
+   Name = "🎲 L1inb7 Hub",
+   LoadingTitle = "🎲 L1inb7 Hub",
+   LoadingSubtitle = "by L1inb7",
    ConfigurationSaving = {
       Enabled = false,
       FileName = "L1inb7Hub"
@@ -19,7 +19,7 @@ local ScriptsTab = Window:CreateTab("Scripts", 4483362458)
 
 -- SCRIPT 1
 ScriptsTab:CreateButton({
-   Name = "+1 Speed Escape Skateboard Script",
+   Name = "🛹 +1 Speed Escape Skateboard Script",
    Callback = function()
       loadstring(game:HttpGet("https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua"))()
    end,
