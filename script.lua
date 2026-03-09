@@ -248,7 +248,7 @@ infoPage.Visible = false
 infoPage.Parent = content
 
 local infoCards = {
- {title="YouTube", subtitle="L1inb7_Scriptss", url="https://youtube.com/@L1inb7_Scriptss", icon="rbxassetid://6031075938", color=Color3.fromRGB(200,40,40)},
+ {title="YouTube", subtitle="l1inb7_scriptss", url="https://youtube.com/@l1inb7_scriptss", icon="rbxassetid://6031075938", color=Color3.fromRGB(200,40,40)},
  {title="Discord", subtitle="Join Server", url="https://discord.gg/", icon="rbxassetid://6031071053", color=Color3.fromRGB(90,120,255)}
 }
 
