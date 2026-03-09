@@ -1,66 +1,65 @@
+-- SERVICES
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
 -- GUI PARENT
 local parent = game:GetService("CoreGui")
 pcall(function()
-	if gethui then parent = gethui() end
+    if gethui then parent = gethui() end
 end)
 
-local KEY = "L1inb7FREE"
+local KEY = "WIP"
 local unlocked = false
 
 local gui = Instance.new("ScreenGui")
 gui.Parent = parent
 gui.Name = "L1inb7Hub"
 
-------------------------------------------------
 -- CLICK SOUND
-------------------------------------------------
-
 local clickSound = Instance.new("Sound")
 clickSound.SoundId = "rbxassetid://9118823102"
 clickSound.Volume = 1
 clickSound.Parent = gui
 
 ------------------------------------------------
--- OPEN BUTTON
+-- OPEN BUTTON (Lin)
 ------------------------------------------------
-
 local open = Instance.new("TextButton")
-open.Size = UDim2.new(0,40,0,40)
-open.Position = UDim2.new(0,20,0.5,-20)
+open.Size = UDim2.new(0,50,0,50)
+open.Position = UDim2.new(0,20,0.5,-25)
 open.Text = "Lin"
-open.Font = Enum.Font.GothamBold
-open.TextSize = 14
+open.Font = Enum.Font.FredokaOne
+open.TextSize = 16
 open.TextColor3 = Color3.new(1,1,1)
-open.BackgroundColor3 = Color3.fromRGB(120,80,255)
+open.BackgroundColor3 = Color3.fromRGB(30,30,30)
 open.Parent = gui
-
 local openCorner = Instance.new("UICorner")
 openCorner.CornerRadius = UDim.new(1,0)
 openCorner.Parent = open
-
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(70,0,140))
+}
+gradient.Rotation = 45
+gradient.Parent = open -- только фон кнопки
 open.Active = true
 open.Draggable = true
 
 ------------------------------------------------
 -- KEY FRAME
 ------------------------------------------------
-
 local keyFrame = Instance.new("Frame")
 keyFrame.Size = UDim2.new(0,250,0,130)
 keyFrame.Position = UDim2.new(0.5,-125,0.5,-65)
 keyFrame.BackgroundColor3 = Color3.fromRGB(30,30,40)
 keyFrame.Visible = true
-keyFrame.Active = true
-keyFrame.Draggable = true
 keyFrame.Parent = gui
-
-local keyCorner = Instance.new("UICorner")
-keyCorner.CornerRadius = UDim.new(0,16)
-keyCorner.Parent = keyFrame
+Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0,16)
 
 local keyTitle = Instance.new("TextLabel")
 keyTitle.Text = "L1inb7 Hub Key"
-keyTitle.Font = Enum.Font.GothamBold
+keyTitle.Font = Enum.Font.FredokaOne
 keyTitle.TextSize = 18
 keyTitle.TextColor3 = Color3.new(1,1,1)
 keyTitle.BackgroundTransparency = 1
@@ -71,270 +70,309 @@ local keyBox = Instance.new("TextBox")
 keyBox.PlaceholderText = "Enter Key"
 keyBox.Size = UDim2.new(0.8,0,0,30)
 keyBox.Position = UDim2.new(0.1,0,0.4,0)
-keyBox.Font = Enum.Font.Gotham
+keyBox.Font = Enum.Font.FredokaOne
 keyBox.TextColor3 = Color3.new(1,1,1)
 keyBox.BackgroundColor3 = Color3.fromRGB(45,45,60)
 keyBox.Parent = keyFrame
-
-local keyBoxCorner = Instance.new("UICorner")
-keyBoxCorner.CornerRadius = UDim.new(0,10)
-keyBoxCorner.Parent = keyBox
+Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0,10)
 
 local unlock = Instance.new("TextButton")
 unlock.Text = "Unlock"
 unlock.Size = UDim2.new(0.5,0,0,30)
 unlock.Position = UDim2.new(0.25,0,0.7,0)
-unlock.Font = Enum.Font.GothamSemibold
+unlock.Font = Enum.Font.FredokaOne
 unlock.TextColor3 = Color3.new(1,1,1)
 unlock.BackgroundColor3 = Color3.fromRGB(120,80,255)
 unlock.Parent = keyFrame
-
-local unlockCorner = Instance.new("UICorner")
-unlockCorner.CornerRadius = UDim.new(0,10)
-unlockCorner.Parent = unlock
+Instance.new("UICorner",unlock).CornerRadius = UDim.new(0,10)
 
 ------------------------------------------------
 -- MAIN MENU
 ------------------------------------------------
-
 local main = Instance.new("Frame")
-main.Size = UDim2.new(0,600,0,340)
-main.Position = UDim2.new(0.5,-300,0.5,-170)
+main.Size = UDim2.new(0,650,0,380)
+main.Position = UDim2.new(0.5,-325,0.5,-190)
 main.BackgroundColor3 = Color3.fromRGB(25,25,35)
 main.Visible = false
+main.Parent = gui
+Instance.new("UICorner", main).CornerRadius = UDim.new(0,20)
 main.Active = true
 main.Draggable = true
-main.Parent = gui
-
-local mainCorner = Instance.new("UICorner")
-mainCorner.CornerRadius = UDim.new(0,18)
-mainCorner.Parent = main
-
-------------------------------------------------
--- CLOSE BUTTON
-------------------------------------------------
 
 local close = Instance.new("TextButton")
-close.Size = UDim2.new(0,28,0,28)
-close.Position = UDim2.new(1,-35,0,7)
+close.Size = UDim2.new(0,24,0,24)
+close.Position = UDim2.new(1,-32,0,8)
 close.Text = "X"
-close.Font = Enum.Font.GothamBold
+close.Font = Enum.Font.FredokaOne
 close.TextSize = 14
 close.TextColor3 = Color3.new(1,1,1)
 close.BackgroundColor3 = Color3.fromRGB(200,60,60)
 close.Parent = main
-
-local closeCorner = Instance.new("UICorner")
-closeCorner.CornerRadius = UDim.new(1,0)
-closeCorner.Parent = close
-
+close.ZIndex = 10
+Instance.new("UICorner",close).CornerRadius = UDim.new(1,0)
 close.MouseButton1Click:Connect(function()
-	clickSound:Play()
-	main.Visible = false
+    main.Visible = false
 end)
 
 ------------------------------------------------
 -- SIDEBAR
 ------------------------------------------------
-
 local sidebar = Instance.new("Frame")
 sidebar.Size = UDim2.new(0,150,1,0)
 sidebar.BackgroundColor3 = Color3.fromRGB(35,35,50)
 sidebar.Parent = main
-
-local sidebarCorner = Instance.new("UICorner")
-sidebarCorner.CornerRadius = UDim.new(0,18)
-sidebarCorner.Parent = sidebar
+Instance.new("UICorner", sidebar).CornerRadius = UDim.new(0,18)
 
 local title = Instance.new("TextLabel")
 title.Text = "L1inb7 Hub"
-title.Font = Enum.Font.GothamBold
+title.Font = Enum.Font.FredokaOne
 title.TextSize = 20
 title.TextColor3 = Color3.new(1,1,1)
 title.BackgroundTransparency = 1
-title.Size = UDim2.new(1,0,0,50)
+title.Size = UDim2.new(1,0,0,30)
 title.Parent = sidebar
 
-------------------------------------------------
--- CONTENT
-------------------------------------------------
+local wipLabel = Instance.new("TextLabel")
+wipLabel.Text = "WIP"
+wipLabel.Font = Enum.Font.FredokaOne
+wipLabel.TextSize = 14
+wipLabel.TextColor3 = Color3.fromRGB(200,200,200)
+wipLabel.BackgroundTransparency = 1
+wipLabel.Size = UDim2.new(1,0,0,20)
+wipLabel.Position = UDim2.new(0,0,0,30)
+wipLabel.Parent = sidebar
 
-local content = Instance.new("Frame")
+------------------------------------------------
+-- CONTENT SCROLL
+------------------------------------------------
+local content = Instance.new("ScrollingFrame")
 content.Size = UDim2.new(1,-170,1,-20)
 content.Position = UDim2.new(0,160,0,10)
 content.BackgroundTransparency = 1
+content.ScrollBarThickness = 8
+content.CanvasSize = UDim2.new(0,0,0,0)
 content.Parent = main
 
+------------------------------------------------
+-- GAMES PAGE
+------------------------------------------------
 local gamesPage = Instance.new("Frame")
 gamesPage.Size = UDim2.new(1,0,1,0)
 gamesPage.BackgroundTransparency = 1
 gamesPage.Parent = content
 
+local cardList = {
+ {title="+1 Speed Escape Skateboard", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua", image=true},
+ {title="soon...", url="", image=false},{title="soon...", url="", image=false},
+ {title="soon...", url="", image=false},{title="soon...", url="", image=false},
+ {title="soon...", url="", image=false},{title="soon...", url="", image=false},
+ {title="soon...", url="", image=false},{title="soon...", url="", image=false},
+ {title="soon...", url="", image=false}
+}
+
+local cardWidth = 200
+local cardHeight = 120
+local spacingX = 15
+local spacingY = 15
+local cardsPerRow = 2
+
+for i,data in ipairs(cardList) do
+ local row = math.floor((i-1)/cardsPerRow)
+ local col = (i-1)%cardsPerRow
+ local card = Instance.new("Frame")
+ card.Size = UDim2.new(0,cardWidth,0,cardHeight)
+ card.Position = UDim2.new(0,col*(cardWidth+spacingX),0,row*(cardHeight+spacingY))
+ card.BackgroundColor3 = Color3.fromRGB(40,40,65)
+ card.Parent = gamesPage
+ Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
+
+ if data.image then
+     local img = Instance.new("ImageLabel")
+     img.Size = UDim2.new(1,0,1,0)
+     img.BackgroundTransparency = 1
+     img.Image = "rbxassetid://122159037834888"
+     img.Parent = card
+     Instance.new("UICorner",img).CornerRadius = UDim.new(0,16)
+
+     -- Добавляем тёмное затемнение
+     local overlay = Instance.new("Frame")
+     overlay.Size = UDim2.new(1,0,1,0)
+     overlay.BackgroundColor3 = Color3.new(0,0,0)
+     overlay.BackgroundTransparency = 0.4
+     overlay.Parent = card
+     Instance.new("UICorner",overlay).CornerRadius = UDim.new(0,16)
+ end
+
+ -- TEXT
+ local titleLabel = Instance.new("TextLabel")
+ titleLabel.Text = data.title
+ titleLabel.Font = Enum.Font.FredokaOne
+ titleLabel.TextSize = 16
+ titleLabel.TextColor3 = Color3.new(1,1,1)
+ titleLabel.BackgroundTransparency = 1
+ titleLabel.Position = UDim2.new(0,5,0,5)
+ titleLabel.Size = UDim2.new(1,-10,0,30)
+ titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+ titleLabel.ZIndex = 3
+ titleLabel.Parent = card
+
+ local run = Instance.new("TextButton")
+ run.Text = "Run"
+ run.Font = Enum.Font.FredokaOne
+ run.TextSize = 14
+ run.TextColor3 = Color3.new(1,1,1)
+ run.BackgroundColor3 = Color3.fromRGB(120,80,255)
+ run.Size = UDim2.new(0,80,0,28)
+ run.Position = UDim2.new(0,10,1,-35)
+ run.Parent = card
+ Instance.new("UICorner",run).CornerRadius = UDim.new(0,10)
+
+ run.MouseButton1Click:Connect(function()
+     if data.url~="" then
+         loadstring(game:HttpGet(data.url))()
+     end
+ end)
+end
+
+-- Обновляем CanvasSize для прокрутки
+gamesPage.Size = UDim2.new(1,0,0,(math.ceil(#cardList/cardsPerRow)*(cardHeight+spacingY)))
+content.CanvasSize = UDim2.new(0,0,gamesPage.Size.Y.Scale,gamesPage.Size.Y.Offset)
+
+------------------------------------------------
+-- INFO PAGE
+------------------------------------------------
 local infoPage = Instance.new("Frame")
 infoPage.Size = UDim2.new(1,0,1,0)
 infoPage.BackgroundTransparency = 1
 infoPage.Visible = false
 infoPage.Parent = content
 
-------------------------------------------------
--- GAME CARD
-------------------------------------------------
+local infoCards = {
+ {title="YouTube", subtitle="L1inb7_Scriptss", url="https://youtube.com/@L1inb7_Scriptss", icon="rbxassetid://6031075938", color=Color3.fromRGB(200,40,40)},
+ {title="Discord", subtitle="Join Server", url="https://discord.gg/", icon="rbxassetid://6031071053", color=Color3.fromRGB(90,120,255)}
+}
 
-local card = Instance.new("Frame")
-card.Size = UDim2.new(0,240,0,150)
-card.BackgroundColor3 = Color3.fromRGB(40,40,65)
-card.Parent = gamesPage
+local infoCardWidth = 200
+local spacing = 25
+for i,data in ipairs(infoCards) do
+ local card = Instance.new("Frame")
+ card.Size = UDim2.new(0,infoCardWidth,0,140)
+ card.Position = UDim2.new(0,(i-1)*(infoCardWidth+spacing),0,40)
+ card.BackgroundColor3 = data.color
+ card.Parent = infoPage
+ Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
 
-local cardCorner = Instance.new("UICorner")
-cardCorner.CornerRadius = UDim.new(0,18)
-cardCorner.Parent = card
+ local icon = Instance.new("ImageLabel")
+ icon.Size = UDim2.new(0,40,0,40)
+ icon.Position = UDim2.new(0,10,0,10)
+ icon.BackgroundTransparency = 1
+ icon.Image = data.icon
+ icon.Parent = card
 
--- IMAGE BACKGROUND
-local image = Instance.new("ImageLabel")
-image.Size = UDim2.new(1,0,1,0)
-image.BackgroundTransparency = 1
-image.Image = "rbxassetid://122159037834888"
-image.Parent = card
+ local titleLabel = Instance.new("TextLabel")
+ titleLabel.Text = data.title
+ titleLabel.Font = Enum.Font.FredokaOne
+ titleLabel.TextSize = 20
+ titleLabel.TextColor3 = Color3.new(1,1,1)
+ titleLabel.BackgroundTransparency = 1
+ titleLabel.Position = UDim2.new(0,60,0,10)
+ titleLabel.Size = UDim2.new(1,-70,0,25)
+ titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+ titleLabel.Parent = card
 
-local imgCorner = Instance.new("UICorner")
-imgCorner.CornerRadius = UDim.new(0,18)
-imgCorner.Parent = image
+ local subtitle = Instance.new("TextLabel")
+ subtitle.Text = data.subtitle
+ subtitle.Font = Enum.Font.FredokaOne
+ subtitle.TextSize = 14
+ subtitle.TextColor3 = Color3.fromRGB(220,220,220)
+ subtitle.BackgroundTransparency = 1
+ subtitle.Position = UDim2.new(0,60,0,35)
+ subtitle.Size = UDim2.new(1,-70,0,20)
+ subtitle.TextXAlignment = Enum.TextXAlignment.Left
+ subtitle.Parent = card
 
--- DARK OVERLAY
-local overlay = Instance.new("Frame")
-overlay.Size = UDim2.new(1,0,1,0)
-overlay.BackgroundColor3 = Color3.new(0,0,0)
-overlay.BackgroundTransparency = 0.4
-overlay.Parent = card
+ local btn = Instance.new("TextButton")
+ btn.Text = "Open"
+ btn.Font = Enum.Font.FredokaOne
+ btn.TextSize = 16
+ btn.TextColor3 = Color3.new(1,1,1)
+ btn.BackgroundColor3 = Color3.fromRGB(30,30,40)
+ btn.Size = UDim2.new(0,100,0,30)
+ btn.Position = UDim2.new(0.5,-50,1,-40)
+ btn.Parent = card
+ Instance.new("UICorner", btn).CornerRadius = UDim.new(0,10)
 
-local overlayCorner = Instance.new("UICorner")
-overlayCorner.CornerRadius = UDim.new(0,18)
-overlayCorner.Parent = overlay
-
--- GAME TITLE
-local gameTitle = Instance.new("TextLabel")
-gameTitle.Text = "+1 Speed Escape Skateboard"
-gameTitle.Font = Enum.Font.GothamSemibold
-gameTitle.TextSize = 16
-gameTitle.TextColor3 = Color3.new(1,1,1)
-gameTitle.BackgroundTransparency = 1
-gameTitle.Position = UDim2.new(0,10,0,10)
-gameTitle.Size = UDim2.new(1,-20,0,30)
-gameTitle.TextXAlignment = Enum.TextXAlignment.Left
-gameTitle.Parent = card
-
--- RUN BUTTON
-local run = Instance.new("TextButton")
-run.Text = "Run"
-run.Font = Enum.Font.GothamBold
-run.TextSize = 14
-run.TextColor3 = Color3.new(1,1,1)
-run.BackgroundColor3 = Color3.fromRGB(120,80,255)
-run.Size = UDim2.new(0,90,0,32)
-run.Position = UDim2.new(0,10,1,-40)
-run.Parent = card
-
-local runCorner = Instance.new("UICorner")
-runCorner.CornerRadius = UDim.new(0,10)
-runCorner.Parent = run
-
-run.MouseButton1Click:Connect(function()
-	clickSound:Play()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua"))()
-end)
-
-------------------------------------------------
--- INFO PAGE
-------------------------------------------------
-
-local yt = Instance.new("TextButton")
-yt.Text = "My YouTube"
-yt.Size = UDim2.new(0,160,0,40)
-yt.Position = UDim2.new(0,20,0,20)
-yt.Font = Enum.Font.GothamBold
-yt.TextColor3 = Color3.new(1,1,1)
-yt.BackgroundColor3 = Color3.fromRGB(255,60,60)
-yt.Parent = infoPage
-
-local ytCorner = Instance.new("UICorner")
-ytCorner.CornerRadius = UDim.new(0,10)
-ytCorner.Parent = yt
-
-yt.MouseButton1Click:Connect(function()
-	clickSound:Play()
-	setclipboard("@L1nb7_Scriptss")
-	yt.Text = "Copied!"
-	wait(2)
-	yt.Text = "My YouTube"
-end)
-
-------------------------------------------------
--- SIDEBAR BUTTONS
-------------------------------------------------
-
-local function tab(name,y,callback)
-
-	local b = Instance.new("TextButton")
-	b.Text = name
-	b.Font = Enum.Font.Gotham
-	b.TextSize = 14
-	b.TextColor3 = Color3.new(1,1,1)
-	b.BackgroundColor3 = Color3.fromRGB(50,50,70)
-	b.Size = UDim2.new(1,-20,0,36)
-	b.Position = UDim2.new(0,10,0,y)
-	b.Parent = sidebar
-
-	local bCorner = Instance.new("UICorner")
-	bCorner.CornerRadius = UDim.new(0,10)
-	bCorner.Parent = b
-
-	b.MouseButton1Click:Connect(function()
-		clickSound:Play()
-		callback()
-	end)
-
+ if data.title == "YouTube" then
+     btn.MouseButton1Click:Connect(function()
+         setclipboard(data.url)
+         local oldText = btn.Text
+         btn.Text = "Copied!"
+         delay(3,function() btn.Text = oldText end)
+     end)
+ else
+     btn.MouseButton1Click:Connect(function()
+         setclipboard(data.url)
+     end)
+ end
 end
 
-tab("Games",70,function()
-	infoPage.Visible = false
-	gamesPage.Visible = true
-end)
+local credit = Instance.new("TextLabel")
+credit.Text = "created by L1inb7, work in progress"
+credit.Font = Enum.Font.FredokaOne
+credit.TextSize = 18
+credit.TextColor3 = Color3.fromRGB(200,200,200)
+credit.BackgroundTransparency = 1
+credit.Size = UDim2.new(1,0,0,40)
+credit.Position = UDim2.new(0,0,1,-50)
+credit.Parent = infoPage
 
-tab("Info",115,function()
-	gamesPage.Visible = false
-	infoPage.Visible = true
-end)
+------------------------------------------------
+-- TABS
+------------------------------------------------
+local function tab(name,y,page)
+ local b = Instance.new("TextButton")
+ b.Text = name
+ b.Font = Enum.Font.FredokaOne
+ b.TextSize = 14
+ b.TextColor3 = Color3.new(1,1,1)
+ b.BackgroundColor3 = Color3.fromRGB(50,50,70)
+ b.Size = UDim2.new(1,-20,0,36)
+ b.Position = UDim2.new(0,10,0,y)
+ b.Parent = sidebar
+ Instance.new("UICorner", b).CornerRadius = UDim.new(0,10)
+ b.MouseButton1Click:Connect(function()
+     gamesPage.Visible = false
+     infoPage.Visible = false
+     page.Visible = true
+ end)
+end
+
+tab("Games",70,gamesPage)
+tab("Info",115,infoPage)
 
 ------------------------------------------------
 -- KEY SYSTEM
 ------------------------------------------------
-
 open.MouseButton1Click:Connect(function()
-
-	clickSound:Play()
-
-	if main.Visible then
-		main.Visible = false
-	else
-		if unlocked then
-			main.Visible = true
-		else
-			keyFrame.Visible = true
-		end
-	end
-
+ clickSound:Play()
+ if main.Visible then
+     main.Visible = false
+ else
+     if unlocked then
+         main.Visible = true
+     else
+         keyFrame.Visible = true
+     end
+ end
 end)
 
 unlock.MouseButton1Click:Connect(function()
-
-	clickSound:Play()
-
-	if keyBox.Text == KEY then
-		unlocked = true
-		keyFrame.Visible = false
-		main.Visible = true
-	else
-		keyBox.Text = "Wrong Key"
-	end
-
+ clickSound:Play()
+ if keyBox.Text == KEY then
+     unlocked = true
+     keyFrame.Visible = false
+     main.Visible = true
+ else
+     keyBox.Text = "Wrong Key"
+ end
 end)
