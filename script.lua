@@ -193,7 +193,7 @@ cardCorner.Parent = card
 local image = Instance.new("ImageLabel")
 image.Size = UDim2.new(1,0,1,0)
 image.BackgroundTransparency = 1
-image.Image = "rbxassetid://128973598543744"
+image.Image = "rbxassetid://122159037834888"
 image.Parent = card
 
 local imgCorner = Instance.new("UICorner")
