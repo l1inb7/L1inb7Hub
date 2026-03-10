@@ -92,7 +92,7 @@ Instance.new("UICorner",unlock).CornerRadius = UDim.new(0,10)
 local main = Instance.new("Frame")
 main.Size = UDim2.new(0,650,0,380)
 main.Position = UDim2.new(0.5,-325,0.5,-190)
-main.BackgroundColor3 = Color3.fromRGB(25,25,35)
+main.BackgroundColor3 = Color3.fromRGB(40,20,60)
 main.Visible = false
 main.Parent = gui
 Instance.new("UICorner", main).CornerRadius = UDim.new(0,20)
@@ -119,28 +119,17 @@ end)
 ------------------------------------------------
 local sidebar = Instance.new("Frame")
 sidebar.Size = UDim2.new(0,150,1,0)
-sidebar.BackgroundColor3 = Color3.fromRGB(35,35,50)
+sidebar.BackgroundColor3 = Color3.fromRGB(55,30,85)
 sidebar.Parent = main
 Instance.new("UICorner", sidebar).CornerRadius = UDim.new(0,18)
 
-local title = Instance.new("TextLabel")
-title.Text = "L1inb7 Hub"
-title.Font = Enum.Font.FredokaOne
-title.TextSize = 20
-title.TextColor3 = Color3.new(1,1,1)
+local title = Instance.new("ImageLabel")
 title.BackgroundTransparency = 1
-title.Size = UDim2.new(1,0,0,30)
+title.Size = UDim2.new(1,-10,0,100)
+title.Position = UDim2.new(0,5,0,0)
+title.Image = "rbxassetid://71810792321588"
+title.ScaleType = Enum.ScaleType.Fit
 title.Parent = sidebar
-
-local wipLabel = Instance.new("TextLabel")
-wipLabel.Text = "WIP"
-wipLabel.Font = Enum.Font.FredokaOne
-wipLabel.TextSize = 14
-wipLabel.TextColor3 = Color3.fromRGB(200,200,200)
-wipLabel.BackgroundTransparency = 1
-wipLabel.Size = UDim2.new(1,0,0,20)
-wipLabel.Position = UDim2.new(0,0,0,30)
-wipLabel.Parent = sidebar
 
 ------------------------------------------------
 -- CONTENT SCROLL
@@ -182,7 +171,7 @@ for i,data in ipairs(gameCards) do
  local card = Instance.new("Frame")
  card.Size = UDim2.new(0,cardWidth,0,cardHeight)
  card.Position = UDim2.new(0,col*(cardWidth+spacingX),0,row*(cardHeight+spacingY))
- card.BackgroundColor3 = Color3.fromRGB(40,40,65)
+ card.BackgroundColor3 = Color3.fromRGB(70,40,110)
  card.Parent = gamesPage
  Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
 
@@ -259,7 +248,7 @@ for i,data in ipairs(universalCards) do
  local card = Instance.new("Frame")
  card.Size = UDim2.new(0,200,0,120)
  card.Position = UDim2.new(0,col*(200+15),0,row*(120+15))
- card.BackgroundColor3 = Color3.fromRGB(40,40,65)
+ card.BackgroundColor3 = Color3.fromRGB(70,40,110)
  card.Parent = universalPage
  Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
 
@@ -396,7 +385,7 @@ local function tab(name,y,page)
  b.Font = Enum.Font.FredokaOne
  b.TextSize = 14
  b.TextColor3 = Color3.new(1,1,1)
- b.BackgroundColor3 = Color3.fromRGB(50,50,70)
+ b.BackgroundColor3 = Color3.fromRGB(80,50,120)
  b.Size = UDim2.new(1,-20,0,36)
  b.Position = UDim2.new(0,10,0,y)
  b.Parent = sidebar
@@ -410,9 +399,9 @@ local function tab(name,y,page)
  end)
 end
 
-tab("Games",70,gamesPage)
-tab("Universal Scripts",115,universalPage)
-tab("Info",160,infoPage)
+tab("Games",90,gamesPage)
+tab("Universal Scripts",135,universalPage)
+tab("Info",180,infoPage)
 
 ------------------------------------------------
 -- KEY SYSTEM
@@ -440,3 +429,4 @@ unlock.MouseButton1Click:Connect(function()
      keyBox.Text = "Wrong Key"
  end
 end)
+
