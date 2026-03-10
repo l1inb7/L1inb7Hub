@@ -42,7 +42,7 @@ gradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(70,0,140))
 }
 gradient.Rotation = 45
-gradient.Parent = open -- только фон кнопки
+gradient.Parent = open
 open.Active = true
 open.Draggable = true
 
@@ -161,7 +161,7 @@ gamesPage.Size = UDim2.new(1,0,1,0)
 gamesPage.BackgroundTransparency = 1
 gamesPage.Parent = content
 
-local cardList = {
+local gameCards = {
  {title="+1 Speed Escape Skateboard", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua", image=true},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
@@ -176,7 +176,7 @@ local spacingX = 15
 local spacingY = 15
 local cardsPerRow = 2
 
-for i,data in ipairs(cardList) do
+for i,data in ipairs(gameCards) do
  local row = math.floor((i-1)/cardsPerRow)
  local col = (i-1)%cardsPerRow
  local card = Instance.new("Frame")
@@ -194,7 +194,6 @@ for i,data in ipairs(cardList) do
      img.Parent = card
      Instance.new("UICorner",img).CornerRadius = UDim.new(0,16)
 
-     -- Добавляем тёмное затемнение
      local overlay = Instance.new("Frame")
      overlay.Size = UDim2.new(1,0,1,0)
      overlay.BackgroundColor3 = Color3.new(0,0,0)
@@ -203,7 +202,6 @@ for i,data in ipairs(cardList) do
      Instance.new("UICorner",overlay).CornerRadius = UDim.new(0,16)
  end
 
- -- TEXT
  local titleLabel = Instance.new("TextLabel")
  titleLabel.Text = data.title
  titleLabel.Font = Enum.Font.FredokaOne
@@ -234,9 +232,67 @@ for i,data in ipairs(cardList) do
  end)
 end
 
--- Обновляем CanvasSize для прокрутки
-gamesPage.Size = UDim2.new(1,0,0,(math.ceil(#cardList/cardsPerRow)*(cardHeight+spacingY)))
-content.CanvasSize = UDim2.new(0,0,gamesPage.Size.Y.Scale,gamesPage.Size.Y.Offset)
+-- Обновляем CanvasSize для Games
+local totalRows = math.ceil(#gameCards / cardsPerRow)
+gamesPage.Size = UDim2.new(1,0,0,(totalRows*(cardHeight+spacingY)))
+content.CanvasSize = UDim2.new(0,0,0,gamesPage.Size.Y.Offset)
+
+------------------------------------------------
+-- UNIVERSAL SCRIPTS PAGE
+------------------------------------------------
+local universalPage = Instance.new("Frame")
+universalPage.Size = UDim2.new(1,0,1,0)
+universalPage.BackgroundTransparency = 1
+universalPage.Visible = false
+universalPage.Parent = content
+
+local universalCards = {
+ {title="Dex Explorer", url="https://rawscripts.net/raw/Universal-Script-DeX-Explorer-114771"},
+ {title="Remote Spy", url="https://rawscripts.net/raw/Universal-Script-Simple-Spy-V3-Mobile-53593"},
+ {title="Infinite Yield", url="https://rawscripts.net/raw/Infinite-Yield_500"}
+}
+
+for i,data in ipairs(universalCards) do
+ local row = math.floor((i-1)/2)
+ local col = (i-1)%2
+
+ local card = Instance.new("Frame")
+ card.Size = UDim2.new(0,200,0,120)
+ card.Position = UDim2.new(0,col*(200+15),0,row*(120+15))
+ card.BackgroundColor3 = Color3.fromRGB(40,40,65)
+ card.Parent = universalPage
+ Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
+
+ local titleLabel = Instance.new("TextLabel")
+ titleLabel.Text = data.title
+ titleLabel.Font = Enum.Font.FredokaOne
+ titleLabel.TextSize = 16
+ titleLabel.TextColor3 = Color3.new(1,1,1)
+ titleLabel.BackgroundTransparency = 1
+ titleLabel.Position = UDim2.new(0,5,0,5)
+ titleLabel.Size = UDim2.new(1,-10,0,30)
+ titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+ titleLabel.Parent = card
+
+ local run = Instance.new("TextButton")
+ run.Text = "Run"
+ run.Font = Enum.Font.FredokaOne
+ run.TextSize = 14
+ run.TextColor3 = Color3.new(1,1,1)
+ run.BackgroundColor3 = Color3.fromRGB(120,80,255)
+ run.Size = UDim2.new(0,80,0,28)
+ run.Position = UDim2.new(0,10,1,-35)
+ run.Parent = card
+ Instance.new("UICorner",run).CornerRadius = UDim.new(0,10)
+
+ run.MouseButton1Click:Connect(function()
+     loadstring(game:HttpGet(data.url))()
+ end)
+end
+
+-- Обновляем CanvasSize для Universal Scripts
+local uTotalRows = math.ceil(#universalCards / 2)
+universalPage.Size = UDim2.new(1,0,0,(uTotalRows*(120+15)))
 
 ------------------------------------------------
 -- INFO PAGE
@@ -254,6 +310,7 @@ local infoCards = {
 
 local infoCardWidth = 200
 local spacing = 25
+
 for i,data in ipairs(infoCards) do
  local card = Instance.new("Frame")
  card.Size = UDim2.new(0,infoCardWidth,0,140)
@@ -326,6 +383,10 @@ credit.Size = UDim2.new(1,0,0,40)
 credit.Position = UDim2.new(0,0,1,-50)
 credit.Parent = infoPage
 
+-- Обновляем CanvasSize для Info
+local iTotalWidth = #infoCards * (infoCardWidth + spacing)
+infoPage.Size = UDim2.new(0,iTotalWidth,1,0)
+
 ------------------------------------------------
 -- TABS
 ------------------------------------------------
@@ -340,15 +401,18 @@ local function tab(name,y,page)
  b.Position = UDim2.new(0,10,0,y)
  b.Parent = sidebar
  Instance.new("UICorner", b).CornerRadius = UDim.new(0,10)
+
  b.MouseButton1Click:Connect(function()
      gamesPage.Visible = false
+     universalPage.Visible = false
      infoPage.Visible = false
      page.Visible = true
  end)
 end
 
 tab("Games",70,gamesPage)
-tab("Info",115,infoPage)
+tab("Universal Scripts",115,universalPage)
+tab("Info",160,infoPage)
 
 ------------------------------------------------
 -- KEY SYSTEM
