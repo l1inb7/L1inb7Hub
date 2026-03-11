@@ -236,10 +236,11 @@ universalPage.Visible = false
 universalPage.Parent = content
 
 local universalCards = {
- {title="Dex Explorer", url="https://rawscripts.net/raw/Universal-Script-DeX-Explorer-114771"},
- {title="Remote Spy", url="https://rawscripts.net/raw/Universal-Script-Simple-Spy-V3-Mobile-53593"},
- {title="Infinite Yield", url="https://rawscripts.net/raw/Infinite-Yield_500"}
+ {title="Dex Explorer", url="https://rawscripts.net/raw/Universal-Script-DeX-Explorer-114771", image="rbxassetid://105585439204981"},
+ {title="Remote Spy", url="https://rawscripts.net/raw/Universal-Script-Simple-Spy-V3-Mobile-53593", image="rbxassetid://79217798381140"},
+ {title="Infinite Yield", url="https://rawscripts.net/raw/Infinite-Yield_500", image="rbxassetid://74442708283372"}
 }
+
 
 for i,data in ipairs(universalCards) do
  local row = math.floor((i-1)/2)
@@ -251,6 +252,21 @@ for i,data in ipairs(universalCards) do
  card.BackgroundColor3 = Color3.fromRGB(70,40,110)
  card.Parent = universalPage
  Instance.new("UICorner", card).CornerRadius = UDim.new(0,16)
+ if data.image then
+     local img = Instance.new("ImageLabel")
+     img.Size = UDim2.new(1,0,1,0)
+     img.BackgroundTransparency = 1
+     img.Image = data.image
+     img.Parent = card
+     Instance.new("UICorner",img).CornerRadius = UDim.new(0,16)
+
+     local overlay = Instance.new("Frame")
+     overlay.Size = UDim2.new(1,0,1,0)
+     overlay.BackgroundColor3 = Color3.new(0,0,0)
+     overlay.BackgroundTransparency = 0.4
+     overlay.Parent = card
+     Instance.new("UICorner",overlay).CornerRadius = UDim.new(0,16)
+    end
 
  local titleLabel = Instance.new("TextLabel")
  titleLabel.Text = data.title
