@@ -52,7 +52,7 @@ open.Draggable = true
 local keyFrame = Instance.new("Frame")
 keyFrame.Size = UDim2.new(0,250,0,130)
 keyFrame.Position = UDim2.new(0.5,-125,0.5,-65)
-keyFrame.BackgroundColor3 = Color3.fromRGB(30,30,40)
+keyFrame.BackgroundColor3 = Color3.fromRGB(55,30,85)
 keyFrame.Visible = true
 keyFrame.Parent = gui
 Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0,16)
@@ -72,7 +72,7 @@ keyBox.Size = UDim2.new(0.8,0,0,30)
 keyBox.Position = UDim2.new(0.1,0,0.4,0)
 keyBox.Font = Enum.Font.FredokaOne
 keyBox.TextColor3 = Color3.new(1,1,1)
-keyBox.BackgroundColor3 = Color3.fromRGB(45,45,60)
+keyBox.BackgroundColor3 = Color3.fromRGB(70,40,110)
 keyBox.Parent = keyFrame
 Instance.new("UICorner", keyBox).CornerRadius = UDim.new(0,10)
 
@@ -284,6 +284,107 @@ local uTotalRows = math.ceil(#universalCards / 2)
 universalPage.Size = UDim2.new(1,0,0,(uTotalRows*(120+15)))
 
 ------------------------------------------------
+-- EXECUTOR PAGE
+------------------------------------------------
+local executorPage = Instance.new("Frame")
+executorPage.Size = UDim2.new(1,0,1,0)
+executorPage.BackgroundTransparency = 1
+executorPage.Visible = false
+executorPage.Parent = content
+local execFrame = Instance.new("Frame")
+execFrame.Size = UDim2.new(0,450,0,320)
+execFrame.Position = UDim2.new(0.5,-230,0.5,-320)
+execFrame.BackgroundColor3 = Color3.fromRGB(35,20,60)
+execFrame.Parent = executorPage
+Instance.new("UICorner",execFrame).CornerRadius = UDim.new(0,14)
+
+local editor = Instance.new("TextBox")
+editor.Size = UDim2.new(1,-20,0,230)
+editor.Position = UDim2.new(0,10,0,10)
+editor.BackgroundColor3 = Color3.fromRGB(20,10,40)
+editor.TextColor3 = Color3.new(1,1,1)
+editor.Font = Enum.Font.Code
+editor.TextSize = 15
+editor.MultiLine = true
+editor.ClearTextOnFocus = false
+editor.TextXAlignment = Enum.TextXAlignment.Left
+editor.TextYAlignment = Enum.TextYAlignment.Top
+editor.Parent = execFrame
+Instance.new("UICorner",editor).CornerRadius = UDim.new(0,10)
+
+local execute = Instance.new("TextButton")
+execute.Size = UDim2.new(0,110,0,34)
+execute.Position = UDim2.new(0,10,1,-40)
+execute.Text = "Execute"
+execute.Font = Enum.Font.FredokaOne
+execute.TextSize = 14
+execute.TextColor3 = Color3.new(1,1,1)
+execute.BackgroundColor3 = Color3.fromRGB(100,60,160)
+execute.Parent = execFrame
+Instance.new("UICorner",execute)
+
+local clear = Instance.new("TextButton")
+clear.Size = UDim2.new(0,110,0,34)
+clear.Position = UDim2.new(0,130,1,-40)
+clear.Text = "Clear"
+clear.Font = Enum.Font.FredokaOne
+clear.TextSize = 14
+clear.TextColor3 = Color3.new(1,1,1)
+clear.BackgroundColor3 = Color3.fromRGB(70,40,120)
+clear.Parent = execFrame
+Instance.new("UICorner",clear)
+
+local save = Instance.new("TextButton")
+save.Size = UDim2.new(0,110,0,34)
+save.Position = UDim2.new(0,250,1,-40)
+save.Text = "Save"
+save.Font = Enum.Font.FredokaOne
+save.TextSize = 14
+save.TextColor3 = Color3.new(1,1,1)
+save.BackgroundColor3 = Color3.fromRGB(50,90,160)
+save.Parent = execFrame
+Instance.new("UICorner",save)
+
+local searchBox = Instance.new("TextBox")
+searchBox.Size = UDim2.new(0,160,0,34)
+searchBox.Position = UDim2.new(1,-170,1,-40)
+searchBox.PlaceholderText = "Search ScriptBlox"
+searchBox.Font = Enum.Font.Code
+searchBox.TextSize = 14
+searchBox.TextColor3 = Color3.new(1,1,1)
+searchBox.BackgroundColor3 = Color3.fromRGB(20,10,40)
+searchBox.Parent = execFrame
+Instance.new("UICorner",searchBox)
+execute.MouseButton1Click:Connect(function()
+ local f = loadstring(editor.Text)
+ if f then
+  pcall(f)
+ end
+end)
+
+clear.MouseButton1Click:Connect(function()
+ editor.Text = ""
+end)
+
+save.MouseButton1Click:Connect(function()
+ if writefile then
+  writefile("LinHubScript.lua",editor.Text)
+ end
+end)
+
+searchBox.FocusLost:Connect(function()
+ local q = searchBox.Text
+ if q ~= "" then
+  local url = "https://scriptblox.com/api/script/search?q="..q
+  local res = game:HttpGet(url)
+  local data = game:GetService("HttpService"):JSONDecode(res)
+  if data.result and data.result.scripts[1] then
+   editor.Text = data.result.scripts[1].script
+  end
+ end
+end)
+
+------------------------------------------------
 -- INFO PAGE
 ------------------------------------------------
 local infoPage = Instance.new("Frame")
@@ -395,13 +496,15 @@ local function tab(name,y,page)
      gamesPage.Visible = false
      universalPage.Visible = false
      infoPage.Visible = false
+     executorPage.Visible = false
      page.Visible = true
  end)
 end
 
 tab("Games",90,gamesPage)
 tab("Universal Scripts",135,universalPage)
-tab("Info",180,infoPage)
+tab("Executor",180,executorPage)
+tab("Info",225,infoPage)
 
 ------------------------------------------------
 -- KEY SYSTEM
@@ -429,4 +532,6 @@ unlock.MouseButton1Click:Connect(function()
      keyBox.Text = "Wrong Key"
  end
 end)
+
+
 
