@@ -152,7 +152,7 @@ gamesPage.Parent = content
 
 local gameCards = {
  {title="+1 Speed Escape Skateboard", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua", image=true},
- {title="soon...", url="", image=false},{title="soon...", url="", image=false},
+ {title="+1 Speed Escape SuperCar", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSuperCar/main/script.lua", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
