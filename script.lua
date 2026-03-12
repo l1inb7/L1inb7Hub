@@ -152,7 +152,7 @@ gamesPage.Parent = content
 
 local gameCards = {
  {title="+1 Speed Escape Skateboard", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSkateboard/main/script.lua", image=true},
- {title="+1 Speed Escape SuperCar", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSuperCar/main/script.lua", image=false},
+ {title="+1 Speed Escape SuperCar", url="https://raw.githubusercontent.com/l1inb7/L1inb7Hub-1SpeedEscapeSuperCar/main/script.lua", image=true},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
  {title="soon...", url="", image=false},{title="soon...", url="", image=false},
@@ -179,7 +179,11 @@ for i,data in ipairs(gameCards) do
      local img = Instance.new("ImageLabel")
      img.Size = UDim2.new(1,0,1,0)
      img.BackgroundTransparency = 1
-     img.Image = "rbxassetid://122159037834888"
+     if data.title == "+1 Speed Escape SuperCar" then
+    img.Image = "rbxassetid://79217798381140"
+else
+    img.Image = "rbxassetid://122159037834888"
+end
      img.Parent = card
      Instance.new("UICorner",img).CornerRadius = UDim.new(0,16)
 
@@ -548,6 +552,7 @@ unlock.MouseButton1Click:Connect(function()
      keyBox.Text = "Wrong Key"
  end
 end)
+
 
 
 
