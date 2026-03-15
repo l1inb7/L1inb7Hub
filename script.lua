@@ -180,7 +180,7 @@ for i,data in ipairs(gameCards) do
      img.Size = UDim2.new(1,0,1,0)
      img.BackgroundTransparency = 1
      if data.title == "+1 Speed Escape SuperCar" then
-    img.Image = "rbxassetid://79217798381140"
+    img.Image = "rbxassetid://89860443561315"
 else
     img.Image = "rbxassetid://122159037834888"
 end
